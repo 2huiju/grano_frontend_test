@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { SetStateAction, useEffect, useRef, useState } from "react";
-import ContactWallet from "../../contactWallet";
+import {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import ContactWallet from "../../../units/contactWallet";
 import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "ethers";
 import jazzicon from "@metamask/jazzicon";
@@ -63,7 +69,7 @@ const EthBalance = styled.div`
   margin-right: 18px;
 `;
 
-const EthImg = styled.img`
+const EthSymbol = styled.img`
   width: 25px;
   height: 25px;
   margin-right: 10px;
@@ -76,7 +82,7 @@ const Header = () => {
   const [activeProfile, setActiveProfile] = useState(false);
   const [balance, setBalance] = useState("");
 
-  const connectWallet = async () => {
+  const connectWallet = useCallback(async () => {
     try {
       await activate(injected, (error) => {
         if ("/No Ethereum provider was found on window.ethereum/")
@@ -87,11 +93,11 @@ const Header = () => {
       alert(err);
       window.open("https://metamask.io/download.html");
     }
-  };
+  }, [activate]);
 
-  const onClickProfile = () => {
+  const onClickProfile = useCallback(() => {
     setActiveProfile(!activeProfile);
-  };
+  }, [activeProfile]);
 
   useEffect(() => {
     const element: HTMLDivElement | null = avatarRef.current;
@@ -128,7 +134,7 @@ const Header = () => {
       <ProfileBox onClick={onClickProfile}>
         {active ? (
           <>
-            <EthImg src="img/commons/eth.svg" />
+            <EthSymbol src="img/commons/eth.svg" />
             <EthBalance>
               {balance && Number(formatEther(balance)).toFixed(4)} ETH
             </EthBalance>
@@ -143,14 +149,12 @@ const Header = () => {
           <KeyboardArrowDownIcon style={{ color: "#808191" }} />
         )}
       </ProfileBox>
-      {activeProfile ? (
+      {activeProfile && (
         <ContactWallet
           setActiveProfile={setActiveProfile}
           avatarRef={avatarRef}
           connectWallet={connectWallet}
         />
-      ) : (
-        <></>
       )}
     </Wrapper>
   );

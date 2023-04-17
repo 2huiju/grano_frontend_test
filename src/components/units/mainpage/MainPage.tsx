@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import RenderCard from "../../commons/card";
+import RenderCard from "../NFTCard";
 
 const Wrapper = styled.div`
   padding: 0 90px;
@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 
 const MainPage = () => {
   const cards = Array.from({ length: 6 }, (_, i) => i * 5 + 1);
+
   return <Wrapper>{cards.map((startIndex) => RenderCard(startIndex))}</Wrapper>;
 };
 

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Card = styled.div`
+const CardContainer = styled.div`
   width: 383px;
   height: 331px;
   display: flex;
@@ -14,7 +14,7 @@ const Card = styled.div`
   background-color: #ffffff;
 `;
 
-const CardImgBox = styled.div`
+const CardImageBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -27,16 +27,15 @@ const InfoBox = styled.div`
   padding: 20px 12px;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
 `;
 
-const TitleImg = styled.img`
+const MainImage = styled.img`
   width: 100%;
   margin-right: 2px;
   object-fit: cover;
 `;
 
-const SubImgBox = styled.div`
+const ThumbnailBox = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -44,7 +43,7 @@ const SubImgBox = styled.div`
   width: 100%;
 `;
 
-const SubImg = styled.img`
+const ThumbnailImage = styled.img`
   width: calc(50% - 2px);
   height: calc(50% - 2px);
   margin: 1px;
@@ -59,18 +58,18 @@ const NFTTitle = styled.div`
   margin-bottom: 12px;
 `;
 
-const PriceWrapper = styled.div`
+const PriceSection = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const PriceBox = styled.div`
+const PriceContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 130px;
 `;
 
-const PriceBoxTitle = styled.div`
+const PriceLabel = styled.div`
   font-family: Urbanist;
   font-size: 14px;
   font-weight: 500;
@@ -80,7 +79,7 @@ const PriceBoxTitle = styled.div`
   margin-bottom: 6px;
 `;
 
-const Price = styled.div`
+const PriceValue = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -92,7 +91,7 @@ const Price = styled.div`
   color: #4c4d53;
 `;
 
-const EthImg = styled.img`
+const EthSymbol = styled.img`
   margin-right: 5px;
 `;
 
@@ -101,35 +100,35 @@ const RenderCard = (startIndex: any) => {
   const subImgIndex = Array.from({ length: 4 }, (_, i) => startIndex + i + 1);
 
   return (
-    <Card>
-      <CardImgBox>
-        <TitleImg src={`img/card/NFT/${titleImgIndex}.svg`} />
-        <SubImgBox>
+    <CardContainer>
+      <CardImageBox>
+        <MainImage src={`img/card/NFT/${titleImgIndex}.svg`} />
+        <ThumbnailBox>
           {subImgIndex.map((index) => (
-            <SubImg key={index} src={`img/card/NFT/${index}.svg`} />
+            <ThumbnailImage key={index} src={`img/card/NFT/${index}.svg`} />
           ))}
-        </SubImgBox>
-      </CardImgBox>
+        </ThumbnailBox>
+      </CardImageBox>
       <InfoBox>
         <NFTTitle>Girl in Red</NFTTitle>
-        <PriceWrapper>
-          <PriceBox>
-            <PriceBoxTitle>Price</PriceBoxTitle>
-            <Price>
-              <EthImg src="img/commons/eth.svg" />
+        <PriceSection>
+          <PriceContainer>
+            <PriceLabel>Price</PriceLabel>
+            <PriceValue>
+              <EthSymbol src="img/commons/eth.svg" />
               27.5 ETH
-            </Price>
-          </PriceBox>
-          <PriceBox>
-            <PriceBoxTitle>Market Cap</PriceBoxTitle>
-            <Price>
-              <EthImg src="img/commons/eth.svg" />
+            </PriceValue>
+          </PriceContainer>
+          <PriceContainer>
+            <PriceLabel>Market Cap</PriceLabel>
+            <PriceValue>
+              <EthSymbol src="img/commons/eth.svg" />
               27.5 ETH
-            </Price>
-          </PriceBox>
-        </PriceWrapper>
+            </PriceValue>
+          </PriceContainer>
+        </PriceSection>
       </InfoBox>
-    </Card>
+    </CardContainer>
   );
 };
 

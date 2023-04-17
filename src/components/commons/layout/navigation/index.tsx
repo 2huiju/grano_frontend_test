@@ -2,7 +2,7 @@ import { breakPoints } from "../../../../commons/styles/media";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 
-const Wrapper = styled.div`
+const NavigationWrapper = styled.div`
   width: 100vw;
   height: 60px;
   padding: 0 122px;
@@ -22,15 +22,14 @@ const Wrapper = styled.div`
   }
 `;
 
-const TitleBox = styled.div<{ activeTitle: string }>`
+const MenuItem = styled.div<{ isActive: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: end;
   margin-right: 65px;
   padding-bottom: 7px;
-  border-bottom: ${(props) =>
-    props.activeTitle === props.title ? "2px solid #000000" : "none"};
+  border-bottom: ${(props) => (props.isActive ? "2px solid #000000" : "none")};
 
   @media ${breakPoints.mobile} {
     margin: 0 5%;
@@ -69,29 +68,25 @@ const Navigation = () => {
   }, []);
 
   const onClickNav = (el: string) => () => {
-    const selectedTitle = el;
-    if (selectedTitle) {
-      setActiveTitle(selectedTitle);
-      sessionStorage.setItem(ACTIVE_NAV, selectedTitle);
-    }
+    setActiveTitle(el);
+    sessionStorage.setItem(ACTIVE_NAV, el);
   };
 
   return (
-    <Wrapper>
+    <NavigationWrapper>
       {titles.map((el) => (
         <>
-          <TitleBox
+          <MenuItem
             onClick={onClickNav(el.title)}
-            title={el.title}
-            activeTitle={activeTitle}
             key={el.title}
+            isActive={el.title === activeTitle}
           >
             <Title title={el.title}>{el.title}</Title>
             <Count>{el.count}k</Count>
-          </TitleBox>
+          </MenuItem>
         </>
       ))}
-    </Wrapper>
+    </NavigationWrapper>
   );
 };
 

@@ -1,9 +1,8 @@
-import { injected } from "../../../commons/connector/index";
 import styled from "@emotion/styled";
 import { useWeb3React } from "@web3-react/core";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject } from "react";
 
-const Wrapper = styled.div<{ active: boolean }>`
+const WalletWrapper = styled.div<{ active: boolean }>`
   position: absolute;
   top: 9%;
   right: 38px;
@@ -19,14 +18,14 @@ const Wrapper = styled.div<{ active: boolean }>`
   background-color: #ffffff;
 `;
 
-const Title = styled.div`
+const WalletTitle = styled.div`
   font-family: Gilroy;
   font-size: 16px;
   font-weight: bold;
   color: #000000;
 `;
 
-const ConnectButton = styled.div`
+const WalletConnectButton = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,9 +41,7 @@ const ConnectButton = styled.div`
   cursor: pointer;
 `;
 
-const FoxImg = styled.img``;
-
-const Account = styled.div`
+const AccountInfo = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -55,7 +52,7 @@ const Account = styled.div`
   color: #000;
 `;
 
-const Menu = styled.div`
+const MenuItem = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -101,25 +98,25 @@ const ContactWallet = (props: ContactWallet) => {
   };
 
   return (
-    <>
+    <WalletWrapper active={active}>
       {active ? (
-        <Wrapper active={active}>
-          <FoxImg src="img/connectWallet/metamaskFox.svg" />
-          <Account>
+        <>
+          <img src="img/connectWallet/metamaskFox.svg" />
+          <AccountInfo>
             {account?.substr(0, 6)}...{account?.substr(-6)}
-          </Account>
-          <Menu>Settings</Menu>
-          <Menu onClick={disConnectWallet}>DisConnect</Menu>
-        </Wrapper>
+          </AccountInfo>
+          <MenuItem>Settings</MenuItem>
+          <MenuItem onClick={disConnectWallet}>DisConnect</MenuItem>
+        </>
       ) : (
-        <Wrapper active={active}>
-          <Title>Connect</Title>
-          <ConnectButton onClick={onClickConnectButton}>
+        <>
+          <WalletTitle>Connect</WalletTitle>
+          <WalletConnectButton onClick={onClickConnectButton}>
             Connect Wallet
-          </ConnectButton>
-        </Wrapper>
+          </WalletConnectButton>
+        </>
       )}
-    </>
+    </WalletWrapper>
   );
 };
 
