@@ -70,12 +70,7 @@ const ContactWallet = (props: ContactWallet) => {
   const { account, active, deactivate } = useWeb3React();
 
   const onClickConnect = async () => {
-    try {
-      await props.connectWallet();
-    } catch (err) {
-      alert(err);
-      window.open("https://metamask.io/download.html");
-    }
+    await props.connectWallet();
   };
 
   const onClickDisConnect = async () => {

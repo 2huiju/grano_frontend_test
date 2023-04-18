@@ -82,17 +82,15 @@ const Navigation = () => {
   return (
     <NavigationWrapper>
       {titles.map((el) => (
-        <>
-          <MenuItem
-            onClick={onClickNav}
-            key={el.title}
-            id={el.page}
-            isActive={el.page === activeTitle}
-          >
-            <Title title={el.title}>{el.title}</Title>
-            <Count>{el.count}k</Count>
-          </MenuItem>
-        </>
+        <MenuItem
+          onClick={onClickNav}
+          key={el.title}
+          id={el.page}
+          isActive={el.page === activeTitle}
+        >
+          <Title title={el.title}>{el.title}</Title>
+          <Count>{el.count}k</Count>
+        </MenuItem>
       ))}
     </NavigationWrapper>
   );

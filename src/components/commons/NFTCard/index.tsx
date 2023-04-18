@@ -1,5 +1,7 @@
+import { NFTCard } from "../../../commons/types/NFTCard";
 import { breakPoints } from "../../../commons/styles/media";
 import styled from "@emotion/styled";
+import { useMemo } from "react";
 
 const CardContainer = styled.div`
   width: 383px;
@@ -105,9 +107,12 @@ const EthSymbol = styled.img`
   margin-right: 5px;
 `;
 
-const RenderCard = (startIndex: number) => {
+const RenderCard = ({ key, startIndex }: NFTCard) => {
   const titleImgIndex = startIndex;
-  const subImgIndex = Array.from({ length: 4 }, (_, i) => startIndex + i + 1);
+  const subImgIndex = useMemo(
+    () => Array.from({ length: 4 }, (_, i) => startIndex + i + 1),
+    [startIndex]
+  );
 
   return (
     <CardContainer>

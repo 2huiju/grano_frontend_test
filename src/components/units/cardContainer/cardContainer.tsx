@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import RenderCard from "../../commons/NFTCard";
 import { breakPoints } from "../../../commons/styles/media";
+import { useMemo } from "react";
 
 const Wrapper = styled.div`
   padding: 0 90px;
@@ -18,10 +19,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const AllPageContainer = (props: { cards: number[] }) => {
+const CardContainer = (props: { cards: number[] }) => {
   return (
-    <Wrapper>{props.cards.map((startIndex) => RenderCard(startIndex))}</Wrapper>
+    <Wrapper>
+      {props.cards.map((startIndex) => {
+        const optimizedRenderCard = useMemo(
+          () => <RenderCard key={startIndex} startIndex={startIndex} />,
+          [startIndex]
+        );
+        return optimizedRenderCard;
+      })}
+    </Wrapper>
   );
 };
 
-export default AllPageContainer;
+export default CardContainer;

@@ -1,13 +1,7 @@
 import styled from "@emotion/styled";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import {
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ContactWallet from "../../../units/contactWallet";
 import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "ethers";
@@ -119,30 +113,30 @@ const Header = () => {
   }, [activeProfile]);
 
   useEffect(() => {
-    const element: HTMLDivElement | null = avatarRef.current;
+    const updateBalanceAndAvatar = async () => {
+      if (account && library) {
+        const balanceResult = await library.getBalance(account);
+        setBalance(balanceResult._hex);
 
-    if (account) {
-      library
-        ?.getBalance(account)
-        .then((result: { _hex: SetStateAction<string> }) =>
-          setBalance(result._hex)
-        );
-    }
-
-    if (element && account) {
-      const addr = account.slice(2, 10);
-      const seed = parseInt(addr, 16);
-      const icon = jazzicon(40, seed);
-      if (element.firstChild) {
-        element.removeChild(element.firstChild);
+        const element = avatarRef.current;
+        const addr = account.slice(2, 10);
+        const seed = parseInt(addr, 16);
+        const icon = jazzicon(40, seed);
+        if (element) {
+          if (element.firstChild) {
+            element.removeChild(element.firstChild);
+          }
+          element.appendChild(icon);
+        }
       }
-      element.appendChild(icon);
-    }
+    };
 
     if (localStorage.getItem("connectedMetaMask") === "true") {
       connectWallet();
     }
-  }, [account, library, avatarRef]);
+
+    updateBalanceAndAvatar();
+  }, [account, library, avatarRef, connectWallet]);
 
   return (
     <Wrapper>
