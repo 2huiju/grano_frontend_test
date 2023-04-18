@@ -1,5 +1,6 @@
 import { breakPoints } from "../../../../commons/styles/media";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const NavigationWrapper = styled.div`
@@ -24,12 +25,18 @@ const NavigationWrapper = styled.div`
 
 const MenuItem = styled.div<{ isActive: boolean }>`
   display: flex;
+  height: 100%;
   flex-direction: row;
   justify-content: center;
   align-items: end;
   margin-right: 65px;
   padding-bottom: 7px;
   border-bottom: ${(props) => (props.isActive ? "2px solid #000000" : "none")};
+  cursor: pointer;
+
+  * {
+    pointer-events: none;
+  }
 
   @media ${breakPoints.mobile} {
     margin: 0 5%;
@@ -51,35 +58,36 @@ const Count = styled.div`
   color: #797a7e;
 `;
 
-const titles = [
-  { title: "All", count: 420 },
-  { title: "Collections", count: 220 },
-  { title: "Singles", count: 352 },
-];
-
-const ACTIVE_NAV = "active-nav";
-
 const Navigation = () => {
+  const router = useRouter();
   const [activeTitle, setActiveTitle] = useState("");
 
-  useEffect(() => {
-    const storedTitle = sessionStorage.getItem(ACTIVE_NAV);
-    setActiveTitle(storedTitle || titles[0].title);
-  }, []);
+  const titles = [
+    { title: "All", count: 420, page: "/allPage" },
+    { title: "Collections", count: 220, page: "/collectionsPage" },
+    { title: "Singles", count: 352, page: "/singlesPage" },
+  ];
 
-  const onClickNav = (el: string) => () => {
-    setActiveTitle(el);
-    sessionStorage.setItem(ACTIVE_NAV, el);
+  const onClickNav = (event: React.MouseEvent<HTMLDivElement>) => {
+    setActiveTitle(event.currentTarget.id);
+    router.push(event.currentTarget.id);
   };
+
+  useEffect(() => {
+    if (!router.asPath.includes(activeTitle) || activeTitle === "") {
+      setActiveTitle(router.asPath);
+    }
+  }, [router.asPath]);
 
   return (
     <NavigationWrapper>
       {titles.map((el) => (
         <>
           <MenuItem
-            onClick={onClickNav(el.title)}
+            onClick={onClickNav}
             key={el.title}
-            isActive={el.title === activeTitle}
+            id={el.page}
+            isActive={el.page === activeTitle}
           >
             <Title title={el.title}>{el.title}</Title>
             <Count>{el.count}k</Count>

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import RenderCard from "../NFTCard";
+import RenderCard from "../../commons/NFTCard";
 import { breakPoints } from "../../../commons/styles/media";
 
 const Wrapper = styled.div`
@@ -8,19 +8,20 @@ const Wrapper = styled.div`
   justify-content: space-around;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 70px;
+  margin: 70px 0 70px 0;
 
   @media ${breakPoints.mobile} {
     padding: 0;
+    margin: 0;
     margin-top: 30px;
     justify-content: center;
   }
 `;
 
-const MainPage = () => {
-  const cards = Array.from({ length: 6 }, (_, i) => i * 5 + 1);
-
-  return <Wrapper>{cards.map((startIndex) => RenderCard(startIndex))}</Wrapper>;
+const AllPageContainer = (props: { cards: number[] }) => {
+  return (
+    <Wrapper>{props.cards.map((startIndex) => RenderCard(startIndex))}</Wrapper>
+  );
 };
 
-export default MainPage;
+export default AllPageContainer;

@@ -75,7 +75,7 @@ interface ContactWallet {
 const ContactWallet = (props: ContactWallet) => {
   const { account, active, deactivate } = useWeb3React();
 
-  const onClickConnectButton = async () => {
+  const onClickConnect = async () => {
     try {
       await props.connectWallet();
     } catch (err) {
@@ -84,7 +84,7 @@ const ContactWallet = (props: ContactWallet) => {
     }
   };
 
-  const disConnectWallet = async () => {
+  const onClickDisConnect = async () => {
     try {
       deactivate();
       props.setActiveProfile(false);
@@ -106,12 +106,12 @@ const ContactWallet = (props: ContactWallet) => {
             {account?.substr(0, 6)}...{account?.substr(-6)}
           </AccountInfo>
           <MenuItem>Settings</MenuItem>
-          <MenuItem onClick={disConnectWallet}>DisConnect</MenuItem>
+          <MenuItem onClick={onClickDisConnect}>DisConnect</MenuItem>
         </>
       ) : (
         <>
           <WalletTitle>Connect</WalletTitle>
-          <WalletConnectButton onClick={onClickConnectButton}>
+          <WalletConnectButton onClick={onClickConnect}>
             Connect Wallet
           </WalletConnectButton>
         </>

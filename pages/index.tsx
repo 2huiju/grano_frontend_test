@@ -1,6 +1,6 @@
-import MainPage from "../src/components/units/mainpage/MainPage";
 import Head from "next/head";
 import styled from "@emotion/styled";
+import AllPage from "./allPage";
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ export default function Home() {
         <meta property="og:description" content="Renaissance Lab. " />
         <link rel="icon" href="/img/layout/logo.svg" />
       </Head>
-      <MainPage />
+      <AllPage />
     </HomeContainer>
   );
 }
