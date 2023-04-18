@@ -75,6 +75,8 @@ const Navigation = () => {
 
   useEffect(() => {
     if (!router.asPath.includes(activeTitle) || activeTitle === "") {
+      // navigation css효과가 새로고침시에도 해제되지 않도록 하기 위한 코드
+      // userEffect시 router page를 감지 후 해당 page에 해당하는 navigation title에 css 효과 적용
       setActiveTitle(router.asPath);
     }
   }, [router.asPath]);

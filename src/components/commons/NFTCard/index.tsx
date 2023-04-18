@@ -110,6 +110,8 @@ const EthSymbol = styled.img`
 const RenderCard = ({ key, startIndex }: NFTCard) => {
   const titleImgIndex = startIndex;
   const subImgIndex = useMemo(
+    // useMemo로 값이 변경되기 전까지 캐싱하도록 최적화
+    // props로 받은 startIndex 에서 4개의 사진을 더해주는 배열을 생성
     () => Array.from({ length: 4 }, (_, i) => startIndex + i + 1),
     [startIndex]
   );

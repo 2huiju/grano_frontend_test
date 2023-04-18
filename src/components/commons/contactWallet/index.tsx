@@ -76,6 +76,7 @@ const ContactWallet = (props: ContactWallet) => {
   const onClickDisConnect = async () => {
     try {
       deactivate();
+      // 메타마스크 연결 해제
       props.setActiveProfile(false);
       if (props.avatarRef.current) {
         props.avatarRef.current.innerHTML = "";

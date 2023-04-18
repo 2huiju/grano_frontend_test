@@ -96,15 +96,19 @@ const Header = () => {
   const [balance, setBalance] = useState("");
 
   const connectWallet = useCallback(async () => {
+    // 메타마스크 연결
     try {
       await activate(injected, (error) => {
         if ("/No Ethereum provider was found on window.ethereum/")
           throw new Error("Metamask 익스텐션을 설치해주세요");
       });
       localStorage.setItem("connectedMetaMask", "true");
+      // disconnect 버튼을 누르지 않았을 경우, 새로고침시에도 연결되어야 하기 때문에 localstorage에 저장
+      // useEffect에서 감지
     } catch (err) {
       alert(err);
       window.open("https://metamask.io/download.html");
+      // 메타마스크 익스텐션이 없을 경우 다운로드 링크로 이동
     }
   }, [activate]);
 
@@ -118,6 +122,7 @@ const Header = () => {
         const balanceResult = await library.getBalance(account);
         setBalance(balanceResult._hex);
 
+        // 메타마스크 프로필 이미지 구현
         const element = avatarRef.current;
         const addr = account.slice(2, 10);
         const seed = parseInt(addr, 16);
