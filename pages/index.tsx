@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
-import AllPage from "./allPage";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -11,6 +12,11 @@ const HomeContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/allPage");
+  }, []);
+
   return (
     <HomeContainer>
       <Head>
@@ -19,7 +25,6 @@ export default function Home() {
         <meta property="og:description" content="Renaissance Lab. " />
         <link rel="icon" href="/img/layout/logo.svg" />
       </Head>
-      <AllPage />
     </HomeContainer>
   );
 }
