@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import RenderCard from "../NFTCard";
+import { breakPoints } from "../../../commons/styles/media";
 
 const Wrapper = styled.div`
   padding: 0 90px;
@@ -8,6 +9,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 70px;
+
+  @media ${breakPoints.mobile} {
+    padding: 0;
+    margin-top: 30px;
+    justify-content: center;
+  }
 `;
 
 const MainPage = () => {

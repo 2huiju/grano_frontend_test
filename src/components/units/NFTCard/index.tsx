@@ -1,3 +1,4 @@
+import { breakPoints } from "../../../commons/styles/media";
 import styled from "@emotion/styled";
 
 const CardContainer = styled.div`
@@ -8,10 +9,15 @@ const CardContainer = styled.div`
   margin: 0 8px 24px 8px;
   flex-shrink: 0;
   flex-grow: 0;
-  padding: 4px 4px 16px;
+  padding: 1px 2px 16px 3px;
   border-radius: 10px;
   border: solid 1px #d2d3d4;
   background-color: #ffffff;
+
+  @media ${breakPoints.mobile} {
+    margin: 20px 0;
+    width: 370px;
+  }
 `;
 
 const CardImageBox = styled.div`
@@ -33,6 +39,10 @@ const MainImage = styled.img`
   width: 100%;
   margin-right: 2px;
   object-fit: cover;
+
+  @media ${breakPoints.mobile} {
+    height: 97%;
+  }
 `;
 
 const ThumbnailBox = styled.div`

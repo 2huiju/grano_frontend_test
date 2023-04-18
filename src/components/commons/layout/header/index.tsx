@@ -13,6 +13,7 @@ import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "ethers";
 import jazzicon from "@metamask/jazzicon";
 import { injected } from "../../../../commons/connector/index";
+import { breakPoints } from "../../../../commons/styles/media";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -22,6 +23,10 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  @media ${breakPoints.mobile} {
+    padding: 20px 10px;
+  }
 `;
 
 const LogoBox = styled.div`
@@ -32,6 +37,12 @@ const LogoBox = styled.div`
 
 const LogoImg = styled.img`
   margin-right: 8px;
+
+  @media ${breakPoints.mobile} {
+    margin-left: 5px;
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 const Logo = styled.div`
@@ -39,6 +50,10 @@ const Logo = styled.div`
   color: #1b1d21;
   font-size: 18px;
   font-weight: 800;
+
+  @media ${breakPoints.mobile} {
+    display: none;
+  }
 `;
 
 const ProfileBox = styled.div`
@@ -67,6 +82,10 @@ const EthBalance = styled.div`
   font-size: 18px;
   color: #444444;
   margin-right: 18px;
+
+  @media ${breakPoints.mobile} {
+    margin-right: 5px;
+  }
 `;
 
 const EthSymbol = styled.img`
@@ -113,7 +132,7 @@ const Header = () => {
     if (element && account) {
       const addr = account.slice(2, 10);
       const seed = parseInt(addr, 16);
-      const icon = jazzicon(40, seed); //generates a size 20 icon
+      const icon = jazzicon(40, seed);
       if (element.firstChild) {
         element.removeChild(element.firstChild);
       }
