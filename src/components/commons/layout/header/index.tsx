@@ -12,7 +12,7 @@ import ContactWallet from "../../../units/contactWallet";
 import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "ethers";
 import jazzicon from "@metamask/jazzicon";
-import { injected } from "../../../../commons/connector/index";
+import { injected } from "../../../../commons/libraries/injectedConnector";
 import { breakPoints } from "../../../../commons/styles/media";
 
 const Wrapper = styled.div`

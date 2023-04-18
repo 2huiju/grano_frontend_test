@@ -105,7 +105,7 @@ const EthSymbol = styled.img`
   margin-right: 5px;
 `;
 
-const RenderCard = (startIndex: any) => {
+const RenderCard = (startIndex: number) => {
   const titleImgIndex = startIndex;
   const subImgIndex = Array.from({ length: 4 }, (_, i) => startIndex + i + 1);
 

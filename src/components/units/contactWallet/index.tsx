@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useWeb3React } from "@web3-react/core";
-import { RefObject } from "react";
+import { ContactWallet } from "../../../commons/types/contactWallet";
 
 const WalletWrapper = styled.div<{ active: boolean }>`
   position: absolute;
@@ -65,12 +65,6 @@ const MenuItem = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
 `;
-
-interface ContactWallet {
-  connectWallet(): unknown;
-  setActiveProfile: (isActive: boolean) => void;
-  avatarRef: RefObject<HTMLDivElement>;
-}
 
 const ContactWallet = (props: ContactWallet) => {
   const { account, active, deactivate } = useWeb3React();
