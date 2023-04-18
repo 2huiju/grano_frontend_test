@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ContactWallet from "../../../units/contactWallet";
+import ContactWallet from "../../contactWallet";
 import { useWeb3React } from "@web3-react/core";
 import { formatEther } from "ethers";
 import jazzicon from "@metamask/jazzicon";
